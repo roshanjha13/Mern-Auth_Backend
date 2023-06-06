@@ -22,7 +22,7 @@ const authUser = asyncHandler(async (req, res) => {
     throw new Error("Invalid email or password");
   }
 
-  res.status(200).json({ message: "Auth User" });
+  //   res.status(200).json({ message: "Auth User" });
 });
 
 // @desc Register a new User
@@ -65,7 +65,11 @@ const registerUser = asyncHandler(async (req, res) => {
 // @access Public
 
 const logoutUser = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: "logout User" });
+  res.cookie("jwt", "", {
+    httpOnly: true,
+    expires: new Date(0),
+  });
+  res.status(200).json({ message: "User logged Out" });
 });
 
 // @desc get User Profile
